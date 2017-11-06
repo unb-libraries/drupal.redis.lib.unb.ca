@@ -5,7 +5,7 @@ services:
 
 env:
   global:
-    - SERVICE_NAME=redis.drupal.lib.unb.ca
+    - SERVICE_NAME=drupal.redis.lib.unb.ca
     - DOCKER_UPSTREAM_IMAGE=redis:alpine
     - DEPLOY_BRANCHES=dev,prod
     - OLD_IMAGES_TO_KEEP=2
