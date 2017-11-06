@@ -14,11 +14,13 @@ env:
 before_install:
   - git clone -b 8.x-1.x git://github.com/unb-libraries/travis-kube-deploy-drupal.git travis
 
+before_script:
+  - travis/installAuthAws.sh
+
 script:
   - travis/buildImagePushToRepo.sh
 
 after_success:
-  - travis/installAuthAws.sh
   - travis/cleanupOldImages.sh
   - travis/triggerKubeDeploy.sh
 
