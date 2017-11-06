@@ -1,0 +1,32 @@
+sudo: required
+
+services:
+  - docker
+
+env:
+  global:
+    - SERVICE_NAME=redis.drupal.lib.unb.ca
+    - DOCKER_UPSTREAM_IMAGE=redis:alpine
+    - DEPLOY_BRANCHES=dev,prod
+    - OLD_IMAGES_TO_KEEP=2
+    - AMAZON_ECR_REGION=us-east-1
+
+before_install:
+  - git clone -b 8.x-1.x git://github.com/unb-libraries/travis-kube-deploy-drupal.git travis
+
+script:
+  - travis/buildImagePushToRepo.sh
+
+after_success:
+  - travis/installAuthAws.sh
+  - travis/cleanupOldImages.sh
+  - travis/triggerKubeDeploy.sh
+
+notifications:
+  slack:
+    rooms:
+      secure: TuP1sv8DmqtZxz7C4u2Me6Iql5kdRajZnc0p1eR0O8OgOi3HBMztpq0U7nuF8HqJHgrsHzQdZpz6gFJM96V0J27hiVYZvQc6QiFxYqxs69+CcrBXnaDL1TUsCnI1riqCWkiZBvs19TPMF6S7ujipPmIn4FEAH/7w0Pw5AaXdOkBGr1yqZkX5x6b/F/Iydifz7gxFAXpoo6zXn+UUx+8z5HGO8LULk3wwpy4lf3WOw/vAOeMfCCAcvw5ZX8sJ9bX/4W/nYFt6b8HCdZyiZRSwEvgsKatwPeHx9j0rxhYwmKiIhnyiSScHDqLO/b3nAR4qZETgLxaUJaAqiIhJCdiHTt99wLWGXBLnqn97BvipgmEgXouYycqwpX1A+sNfJh/q6qrcitchkTiI3yORgl9DogFQijnNzu+MbH5nXti8TYrCz65ZQtPoNzKvyO7dBQmkKYLWbwcFiUAh/c0AhHQZWqZ7tQeZNNjH8TEk+oPOALAbu8F8TQ+TCL5piIsA+ZJa2/BuGZJwNzrooeY7ukB9MqRPoMw5gSBNZB5CB10fsh1YvpXc0vsax/MRi20oYG09eUi4hHCTe9OaYoODkSqPLs21BVA8mo/sFyDW/oWF6OCIF9bv6tKxfNvgZBs9v4nOj4Bgj5UyCDR/LtryJqZwd3OSvWzkQ90z0RDhfZdrHr0=
+    on_start: always
+    on_success: always
+    on_failure: always
+    on_error: always
