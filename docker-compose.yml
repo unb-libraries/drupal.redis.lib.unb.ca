@@ -1,0 +1,12 @@
+version: '3.6'
+
+services:
+  drupal.redis.lib.unb.ca:
+    build:
+      context: .
+    env_file:
+      - ./env/redis.env
+    restart: always
+    container_name: drupal.redis.lib.unb.ca
+    expose:
+      - "3306"

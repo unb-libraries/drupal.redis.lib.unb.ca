@@ -1,0 +1,41 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: redis
+    tier: caching
+    appMajor: "5"
+    uri: dev-drupal.redis.lib.unb.ca
+  name: drupal-redis-lib-unb-ca
+  namespace: dev
+spec:
+  replicas: 1
+  revisionHistoryLimit: 0
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: redis
+        tier: caching
+        appMajor: "5"
+        uri: dev-drupal.redis.lib.unb.ca
+    spec:
+      containers:
+        -
+          env:
+            -
+              name: REDIS_HOME
+              value: "/data"
+          image: "||DEPLOYMENTIMAGE||"
+          imagePullPolicy: Always
+          name: redis
+          ports:
+            -
+              containerPort: 6379
+              name: redis
+      imagePullSecrets:
+        -
+          name: docker-hub-auth
+      priorityClassName: dev-high-priority-services
+      restartPolicy: Always
