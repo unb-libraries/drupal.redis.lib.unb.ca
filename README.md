@@ -1,7 +1,7 @@
 # drupal.redis.lib.unb.ca : Instance Repository
 [![Build Status](https://travis-ci.com/unb-libraries/lib.unb.ca.svg?branch=prod)](https://travis-ci.com/unb-libraries/drupal.redis.lib.unb.ca) [![GitHub license](https://img.shields.io/github/license/unb-libraries/drupal.redis.lib.unb.ca)](https://github.com/unb-libraries/drupal.redis.lib.unb.ca/blob/dev/LICENSE) ![GitHub repo size](https://img.shields.io/github/repo-size/unb-libraries/drupal.redis.lib.unb.ca)
 
-This repository contains all assets used to test, build, and deploy the drupal.redis.lib.unb.ca database server, the database that drives our drupal instances.
+This repository contains all assets used to test, build, and deploy the drupal.redis.lib.unb.ca redis server, the in-memory store that drives our drupal instance caching.
 
 ## How To Deploy
 Local deployment, development and testing is accelerated via [dockworker](https://github.com/unb-libraries/dockworker), our unified framework of [Robo](https://robo.li/) commands that streamline local development of our application on Linux or OSX.
