@@ -10,9 +10,12 @@ metadata:
   namespace: prod
 spec:
   replicas: 1
-  revisionHistoryLimit: 0
+  revisionHistoryLimit: 2
   strategy:
-    type: Recreate
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
   template:
     metadata:
       labels:
@@ -23,13 +26,29 @@ spec:
     spec:
       containers:
         -
+          name: drupal-redis-lib-unb-ca
+          readinessProbe:
+            exec:
+              command:
+                - redis-cli
+                - ping
+            initialDelaySeconds: 30
+            timeoutSeconds: 5
+            periodSeconds: 30
+          livenessProbe:
+            exec:
+              command:
+                - redis-cli
+                - ping
+            initialDelaySeconds: 60
+            timeoutSeconds: 5
+            periodSeconds: 30
           env:
             -
               name: REDIS_HOME
               value: "/data"
           image: "||DEPLOYMENTIMAGE||"
           imagePullPolicy: Always
-          name: redis
           ports:
             -
               containerPort: 6379
