@@ -36,10 +36,8 @@ spec:
             timeoutSeconds: 5
             periodSeconds: 30
           livenessProbe:
-            exec:
-              command:
-                - redis-cli
-                - ping
+            tcpSocket:
+              port: 6379
             initialDelaySeconds: 60
             timeoutSeconds: 5
             periodSeconds: 30
