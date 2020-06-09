@@ -27,6 +27,8 @@ spec:
         appMajor: "5"
         uri: dev-drupal.redis.lib.unb.ca
     spec:
+      nodeSelector:
+        deployenv: dev
       containers:
         -
           name: drupal-redis-lib-unb-ca
