@@ -56,6 +56,6 @@ spec:
               name: redis
       imagePullSecrets:
         -
-          name: docker-hub-auth
+          name: github-container-registry-auth
       priorityClassName: dev-high-priority-services
       restartPolicy: Always
