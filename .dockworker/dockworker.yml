@@ -6,6 +6,7 @@ dockworker:
     project_prefix: IN
     upstream_images:
       - redis:alpine
+    uuid: 3502
   deployment:
     environments:
       - dev
