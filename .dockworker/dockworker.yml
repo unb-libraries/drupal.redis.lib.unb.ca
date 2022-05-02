@@ -1,5 +1,5 @@
 dockworker:
-  version: '3.0'
+  version: '5'
   application:
     name: drupal.redis.lib.unb.ca
     finish_marker: 'Ready to accept connections'
