@@ -6,7 +6,8 @@ ENV REDIS_MAX_MEMORY 32000000000
 
 COPY ./build /build
 RUN mv /build/scripts /scripts && \
-  mv build/conf/redis.conf "$REDIS_CONF_FILE"
+  mkdir -p /usr/local/etc/redis && \
+  mv /build/conf/redis.conf "$REDIS_CONF_FILE"
 
 ENTRYPOINT /scripts/run.sh
 
