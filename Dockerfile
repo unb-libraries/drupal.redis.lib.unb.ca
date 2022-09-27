@@ -1,4 +1,4 @@
-FROM redis:alpine
+FROM redis:7-alpine
 MAINTAINER UNB Libraries <libsupport@unb.ca>
 
 ENV REDIS_CONF_FILE /usr/local/etc/redis/redis.conf
