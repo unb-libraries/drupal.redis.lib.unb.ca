@@ -1,9 +1,14 @@
 FROM redis:alpine
-MAINTAINER Jacob Sanford <jsanford@unb.ca>
+MAINTAINER UNB Libraries <libsupport@unb.ca>
 
-COPY conf/redis.conf /usr/local/etc/redis/redis.conf
+ENV REDIS_CONF_FILE /usr/local/etc/redis/redis.conf
+ENV REDIS_MAX_MEMORY 32000000000
 
-CMD [ "redis-server", "/usr/local/etc/redis/redis.conf" ]
+COPY ./build /build
+RUN mv /build/scripts /scripts && \
+  mv build/conf/redis.conf "$REDIS_CONF_FILE"
+
+ENTRYPOINT /scripts/run.sh
 
 LABEL ca.unb.lib.generator="redis" \
   com.microscaling.docker.dockerfile="/Dockerfile" \
