@@ -28,7 +28,7 @@ spec:
         uri: dev-drupal.redis.lib.unb.ca
     spec:
       nodeSelector:
-        deployenv: dev
+        deploy_dev: 'true'
       containers:
         -
           name: drupal-redis-lib-unb-ca
