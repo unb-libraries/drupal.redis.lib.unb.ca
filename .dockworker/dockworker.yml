@@ -1,26 +1,52 @@
 dockworker:
-  version: '5'
+  version: '6'
   application:
-    name: drupal.redis.lib.unb.ca
-    finish_marker: 'Ready to accept connections'
-    project_prefix: IN
-    upstream_images:
-      - redis:alpine
-    uuid: 3502
-  deployment:
-    environments:
+    name: Redis Instance for Drupal Applications at UNB Libraries
+    uri: https://drupal.redis.lib.unb.ca
+    description: >
+      A Redis instance for use with Drupal applications at UNB Libraries.
+    topics:
+      - redis
+      - drupal
+    identifiers:
+      id: drupal.redis.lib.unb.ca
+      slug: drupal-redis-lib-unb-ca
+      short_slug: drupred
+      uuid: 3502
+    framework:
+      name: Redis
+      version: 7
+      startup_finished_marker: 'Ready to accept connections'
+      endpoint:
+        name: http
+        port: 6379
+        readiness_timeout: 15
+    license:
+      license: MIT
+      holder: University of New Brunswick Libraries
+    shell:
+      path: /bin/sh
+  endpoints:
+    env:
       - dev
       - prod
-    workflow:
-      source: dockworker
-      type: deployment-workflow
-  github:
-    repo: drupal.redis.lib.unb.ca
-    owner: unb-libraries
-  image:
-    push_branches:
-      - dev
-      - prod
-    name: ghcr.io/unb-libraries/drupal.redis.lib.unb.ca
-    date_tag_image: true
-    repository: ghcr
+    deployments:
+      drupal-redis-lib-unb-ca:
+        default: true
+        managed: true
+        name: drupal-redis-lib-unb-ca
+  workflows:
+    vcs:
+      type: github
+      owner: unb-libraries
+      name: drupal.redis.lib.unb.ca
+    jira:
+      project_keys:
+        - IN
+    image:
+      name: ghcr.io/unb-libraries/drupal.redis.lib.unb.ca
+      parent: redis:7-alpine
+      repository: GitHub
+      push-branches:
+        - dev
+        - prod

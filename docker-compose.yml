@@ -1,10 +1,12 @@
 services:
-  drupal.redis.lib.unb.ca:
+  drupal-redis-lib-unb-ca:
     build:
       context: .
     env_file:
       - ./env/redis.env
     restart: unless-stopped
-    container_name: drupal.redis.lib.unb.ca
+    container_name: drupal-redis-lib-unb-ca
     expose:
-      - "3306"
+      - "6379"
+    ports:
+      - "3502:6379"
