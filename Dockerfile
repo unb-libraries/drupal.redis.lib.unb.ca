@@ -1,8 +1,8 @@
 FROM redis:7-alpine
 MAINTAINER UNB Libraries <libsupport@unb.ca>
 
-ENV REDIS_CONF_FILE /usr/local/etc/redis/redis.conf
-ENV REDIS_MAX_MEMORY 32000000000
+ENV REDIS_CONF_FILE="/usr/local/etc/redis/redis.conf"
+ENV REDIS_MAX_MEMORY="32000000000"
 
 COPY ./build /build
 RUN mv /build/scripts /scripts && \
