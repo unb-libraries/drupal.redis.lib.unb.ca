@@ -1,4 +1,4 @@
-FROM redis:7-alpine
+FROM redis:8.2-alpine
 
 ENV REDIS_CONF_FILE="/usr/local/etc/redis/redis.conf"
 ENV REDIS_MAX_MEMORY="32000000000"
